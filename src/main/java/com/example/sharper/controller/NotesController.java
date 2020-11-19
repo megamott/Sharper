@@ -1,4 +1,4 @@
-package com.example.sharper.controllers;
+package com.example.sharper.controller;
 
 import com.example.sharper.domain.Note;
 import com.example.sharper.repos.NoteRepo;
@@ -18,6 +18,11 @@ public class NotesController {
     }
 
     @GetMapping("/")
+    public String greeting(Model model){
+        return "greeting_page";
+    }
+
+    @GetMapping("/notes")
     public String showNotes(Model model){
         Iterable<Note> notes = noteRepo.findAll();
 
@@ -26,8 +31,14 @@ public class NotesController {
         return "main_page";
     }
 
-    @GetMapping("/filter")
-    public String main(@RequestParam(required = false, defaultValue = "") String filter,
+    /**
+     * Fetching notes by tag
+     * @param filter
+     * @param model
+     * @return
+     */
+    @PostMapping("filter")
+    public String filterNotes(@RequestParam(required = false, defaultValue = "") String filter,
                        Model model) {
         Iterable<Note> notes = noteRepo.findAll();
 
@@ -42,7 +53,13 @@ public class NotesController {
         return "main_page";
     }
 
-    @PostMapping("/add-note")
+    /**
+     * Adding a note
+     * @param tag
+     * @param text
+     * @return
+     */
+    @PostMapping("notes")
     public String addNote(@RequestParam(name = "tag") String tag,
                           @RequestParam(name = "text") String text){
 
@@ -50,7 +67,7 @@ public class NotesController {
 
         noteRepo.save(note);
 
-        return "redirect:/";
+        return "redirect:/notes";
 
     }
 
