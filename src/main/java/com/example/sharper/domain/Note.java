@@ -17,8 +17,22 @@ public class Note {
     private String tag;
     private String text;
 
-    public Note(String tag, String text) {
+    // Many notes belong one author
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id")
+    private User author;
+
+    public Note(String tag, String text, User user) {
         this.tag = tag;
         this.text = text;
+        this.author = user;
+    }
+
+    /**
+     * For notes that was add before adding new author field in {@link Note}
+     * @return
+     */
+    public String getAuthorName(){
+        return author != null ? author.getUsername() : "<none>";
     }
 }

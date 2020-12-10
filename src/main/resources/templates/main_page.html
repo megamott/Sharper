@@ -1,28 +1,37 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>Getting Started: Serving Web Content</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head th:replace="pattern/header :: common_header(~{::title})">
+    <title>Sharper</title>
 </head>
+
 <h3>Notes</h3>
+
 <div>
     <form th:action="@{/logout}" method="post">
         <input type="submit" value="Sign Out"/>sharper
     </form>
 </div>
+
 <form method="post" th:action="@{/notes}">
     <label><input type="text" name="tag" placeholder="tag"></label>
     <label><input type="text" name="text" placeholder="text"></label>
     <button type="submit">Add</button>
 </form>
+
 <form method="post" th:action="@{/filter}">
     <input type="text" name="filter" placeholder="tag">
     <button type="submit">Search</button>
 </form>
+
 <div th:each="note: ${notes}">
     <b th:text="${note.getId()}">Id</b>
     <span th:text="${note.getTag()}">Tag</span>
     <i th:text="${note.getText()}">Text</i>
+    <strong th:text="${note.getAuthorName()}"></strong>
 </div>
+
 <br>
+
+<div th:include="~{pattern/footer :: #copy}"></div>
+
 </html>

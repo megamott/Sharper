@@ -1,7 +1,9 @@
 package com.example.sharper.controller;
 
 import com.example.sharper.domain.Note;
+import com.example.sharper.domain.User;
 import com.example.sharper.repos.NoteRepo;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -50,15 +52,17 @@ public class NotesController {
 
     /**
      * Adding a note
+     * @param user author - security
      * @param tag
      * @param text
      * @return
      */
     @PostMapping("notes")
-    public String addNote(@RequestParam(name = "tag") String tag,
+    public String addNote(@AuthenticationPrincipal User user,
+                          @RequestParam(name = "tag") String tag,
                           @RequestParam(name = "text") String text){
 
-        Note note = new Note(tag, text);
+        Note note = new Note(tag, text, user);
 
         noteRepo.save(note);
 
