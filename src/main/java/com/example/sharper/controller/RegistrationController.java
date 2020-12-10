@@ -16,22 +16,22 @@ import java.util.Collections;
 @Controller
 public class RegistrationController {
 
-    private UserRepo userRepo;
+    private final UserRepo userRepo;
 
     public RegistrationController(UserRepo userRepo) {
         this.userRepo = userRepo;
     }
 
     @GetMapping("/registration")
-    public String userRegistration(Model model){
+    public String userRegistration(){
         return "registration";
     }
 
     /**
      * Registration of new user with validation by username
-     * @param user
-     * @param model
-     * @return
+     * @param user add user's username and password with form
+     * @param model simple model
+     * @return registration.html from templates
      */
     @PostMapping("/registration")
     public String addUser(User user, Model model){

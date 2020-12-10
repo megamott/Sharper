@@ -7,12 +7,12 @@
 <h3>Notes</h3>
 <div>
     <form th:action="@{/logout}" method="post">
-        <input type="submit" value="Sign Out"/>
+        <input type="submit" value="Sign Out"/>sharper
     </form>
 </div>
 <form method="post" th:action="@{/notes}">
-    <input type="text" name="tag" placeholder="tag">
-    <input type="text" name="text" placeholder="text">
+    <label><input type="text" name="tag" placeholder="tag"></label>
+    <label><input type="text" name="text" placeholder="text"></label>
     <button type="submit">Add</button>
 </form>
 <form method="post" th:action="@{/filter}">
@@ -20,9 +20,9 @@
     <button type="submit">Search</button>
 </form>
 <div th:each="note: ${notes}">
-    <b th:text="${note.id}"/>
-    <span th:text="${note.tag}"/>
-    <i th:text="${note.text}"/>
+    <b th:text="${note.getId()}">Id</b>
+    <span th:text="${note.getTag()}">Tag</span>
+    <i th:text="${note.getText()}">Text</i>
 </div>
 <br>
 </html>

@@ -17,11 +17,6 @@ public class NotesController {
         this.noteRepo = noteRepo;
     }
 
-    @GetMapping("/")
-    public String greeting(Model model){
-        return "greeting_page";
-    }
-
     @GetMapping("/notes")
     public String showNotes(Model model){
         Iterable<Note> notes = noteRepo.findAll();
