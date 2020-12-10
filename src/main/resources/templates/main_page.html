@@ -3,14 +3,15 @@
 <head th:replace="pattern/header :: common_header(~{::title})">
     <title>Sharper</title>
 </head>
+<nav th:insert="pattern/navbar :: #navbar"></nav>
 
 <h3>Notes</h3>
 
 <div>
     <form th:action="@{/logout}" method="post">
-        <input type="submit" value="Sign Out"/>
+        <button type="submit" class="btn btn-dark">Sign out</button>
     </form>
-    <span><a href="/user/" th:if="${user.isAdmin()}">User list</a></span>
+    <span><a href="/user/" th:if="${user.isAdmin()}" class="btn btn-dark" role="button">User list</a></span>
 </div>
 
 
