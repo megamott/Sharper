@@ -8,9 +8,11 @@
 
 <div>
     <form th:action="@{/logout}" method="post">
-        <input type="submit" value="Sign Out"/>sharper
+        <input type="submit" value="Sign Out"/>
     </form>
+    <span><a href="/user/" th:if="${user.isAdmin()}">User list</a></span>
 </div>
+
 
 <form method="post" th:action="@{/notes}">
     <label><input type="text" name="tag" placeholder="tag"></label>

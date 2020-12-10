@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="pattern/header :: common_header(~{::title})">
+    <title>Registration page</title>
+</head>
+<body>
+
+<table>
+    <thead>
+    <tr>
+        <th>User</th>
+        <th>Password</th>
+        <th>Roles</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user: ${users}">
+        <td th:text="${user.getUsername()}">Name</td>
+        <td th:text="${user.getPassword()}">Password</td>
+        <td th:text="${user.getRoles()}">Roles</td>
+        <td><a th:href="@{/user/{id}(id=${user.getId()})}">Edit</a></td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

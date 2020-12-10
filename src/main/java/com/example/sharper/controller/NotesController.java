@@ -20,9 +20,11 @@ public class NotesController {
     }
 
     @GetMapping("/notes")
-    public String showNotes(Model model){
+    public String showNotes(@AuthenticationPrincipal User user,
+                            Model model){
         Iterable<Note> notes = noteRepo.findAll();
 
+        model.addAttribute("user", user);
         model.addAttribute("notes", notes);
 
         return "main_page";
